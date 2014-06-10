@@ -187,7 +187,7 @@ def readEquipmentFile():
                     currentType = "shirt"
                 elif line.find('Weapons section') >= 0:
                     currentType = "weapon"
-                elif line.find('Off-hand section') >= 0:
+                elif line.find('Offhand section') >= 0:
                     currentType = "off-hand"
                 elif line.find('Accessories section') >= 0:
                     currentType = "accessory"
@@ -203,6 +203,7 @@ def readEquipmentFile():
                         weaponType = parts[3]
                     elif currentType == "off-hand":
                         if len(parts) >= 4:
+                            print repr(parts)
                             offHandType = parts[3]
                         else:
                             offHandType = ""

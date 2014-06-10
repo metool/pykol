@@ -23,6 +23,7 @@ CHAT_CHANNELS = [
     "valhalla",
     "veteran",
     "villa",
+    "talkie",
 ]
 
 def parseIncomingChatMessage(text):
@@ -73,6 +74,9 @@ def parseChatMessages(text, isIncoming):
     multiEmotePattern = PatternManager.getOrCompilePattern("chatMultiLineEmote")
     playerLoggedOnPattern = PatternManager.getOrCompilePattern("chatPlayerLoggedOn")
     playerLoggedOffPattern = PatternManager.getOrCompilePattern("chatPlayerLoggedOff")
+    talkieChannelFrequencyPattern = PatternManager.getOrCompilePattern("chatTalkieFrequency")
+    talkieChannelFrequencyChangePattern = PatternManager.getOrCompilePattern("chatTalkieKennethResponse")
+    
 
     # Get the chat messages.
     chats = []
@@ -262,7 +266,7 @@ def parseChatMessages(text, isIncoming):
                     chat["isMultiline"] = True
                     chat["text"] = ""
                     parsedChat = True
-
+            
         else:
             # See if this is a /who response.
             if parsedChat == False:
@@ -282,7 +286,25 @@ def parseChatMessages(text, isIncoming):
 
         if parsedChat and "text" in chat:
             chat["text"] = cleanChatText(chat["text"])
-
+        
+        # See if this is a response to the /kenneth command in the talkie chan
+        if parsedChat == False:
+            match = talkieChannelFrequencyPattern.search(line)
+            if match:
+                chat["type"] = "talkieFrequency"
+                chat["frequency"] = match.group(1)
+                chat["text"] = ""
+                parsedChat = True
+        
+        # See if this is a response to the /kenneth ????.? command
+        if parsedChat == False:
+            match = talkieChannelFrequencyChangePattern.search(line)
+            if match:
+                chat["type"] = "talkieFrequency"
+                chat["frequency"] = match.group(1)
+                chat["text"] = ""
+                parsedChat = True
+        
         # Handle unrecognized chat messages.
         if parsedChat == False:
             # If the last chat was flagged as starting a multiline

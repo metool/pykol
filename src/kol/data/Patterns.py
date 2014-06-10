@@ -33,6 +33,7 @@ patterns = {
     "menuItem" : r'<input type=radio name=whichitem value="?(-?[0-9]+)"?></td><td><img .*? onclick=\'descitem\("?([^"]+)"?\);\'>',
     "acquireSingleItem" : r'<td[^>]*><img src="[^"]*" alt="[^"]*" title="[^"]*"[^>]*descitem\(([0-9]+)\)[^>]*><\/td><td[^>]*>You acquire an item',
     "acquireMultipleItems" : r'<td[^>]*><img src="[^"]*" alt="[^"]*" title="[^"]*"[^>]*descitem\(([0-9]+)\)[^>]*><\/td><td[^>]*>You acquire <b>([0-9,]*) ',
+    "acquireItemFromItemUse" : r'<table class="item" style="float: none" rel="id=([0-9]+)&s(.*?)onClick=\'descitem\(([0-9]+)\)\'></td><td valign=center class=effect>You acquire an item: <b>(.*?)</b></td>',
     "gainMeat" : r'<td><img src="[^"]*meat\.gif"[^>]*><\/td><td[^>]*>You gain ([0-9,]*?) Meat\.<\/td>',
     "loseMeat" : r'You lose ([0-9,]*?) Meat',
     "isCocktailcraftingIngredient" : (r'<br>\(Cocktailcrafting ingredient\)<br>'),
@@ -51,8 +52,8 @@ patterns = {
     "notFood" : r"That's not something you can eat\.",
     "notEquip" : r"That's not something you can equip\.  And stop screwing with the URLs\.",
     "notEnoughToUse" : r"<table><tr><td>You don't have that many of that item.</td></tr></table>",
-    "notMultiUse" : r"<table><tr><td>That item isn't usable in quantity.</td></tr></table>",
-
+    "notMultiUse" : r"<table><tr><td>That item isn't usable in quantity.</td></tr></table>",    
+    
     # Message-related patterns.
     "brickMessage" : r"http:\/\/images\.kingdomofloathing\.com\/adventureimages\/(brokewin|bigbrick)\.gif",
     "candyHeartMessage" : r"http:\/\/images\.kingdomofloathing\.com\/otherimages\/heart\/hearttop\.gif",
@@ -93,6 +94,7 @@ patterns = {
     "chatPlayerLoggedOn" : r'<font color=green><a target=mainpane href=\'showplayer\.php\?who=([0-9]+)\'><font color=green><b>([^<>]+)<\/b><\/font><\/a> logged on\.<\/font>$',
     "chatPlayerLoggedOff" : r'<font color=green><a target=mainpane href=\'showplayer\.php\?who=([0-9]+)\'><font color=green><b>([^<>]+)<\/b><\/font><\/a> logged off\.<\/font>$',
     "chatTalkieFrequency" : r'<font color=green>The frequency is (.*?), Mr. Rather\.<\/font>',
+    "chatTalkieKennethResponse" : r'<font color=green>You understand the frequency to be (.*?)\.<\/font>',
 
     # Clan dungeon patterns.
     "dungeonActivity" : r'(?:^|<br>|<br><b>|<b>)([^<>]+) \(#([0-9,]+)\) ([^<>]+) \(([0-9,]+) turns?\)',
@@ -322,4 +324,8 @@ patterns = {
     "mallPricesLimited" : r"<tr><td>limited:</td><td><b>([0-9,]+)</b>\(([0-9]+)/day\) x([0-9]+).*?</td><td><b>([0-9,]+)</b>\(([0-9]+)/day\) x([0-9]+).*?</td><td><b>([0-9,]+)</b>\(([0-9]+)/day\) x([0-9]+).*?</td></tr>",
     "mallPriceNotUpdated" : "Nothing updated",
     "mallTransactions" : r"([1-9][1-9]/[1-9][1-9]/[1-9][1-9] [1-9][1-9]:[1-9][1-9]:[1-9][1-9]) <a class=nounder href=\"showplayer.php\?who=([0-9]+)\"><b>(.*?)<\/b><\/a> bought ([0-9]+) \((.*?)\) for ([0-9]+) Meat.<br>",
+    
+     # Clan Hot Dog Stand patterns
+    "HotDogStandContributeSuccess" : "You have put some hot dog making supplies into the hot dog cart man's hot dog cart supply crate\.",
+    "HotDogStandContributeNotEnough" : "You don't have that many of that ingredient\.",
 }
